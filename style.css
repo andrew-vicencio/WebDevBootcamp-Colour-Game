@@ -1,0 +1,56 @@
+body {
+    background-color: #232323;
+}
+
+.header {
+    padding: 3% 3%;
+    background-color: cadetblue;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.square {
+    border-radius: 25px;
+    width: 30%;
+    padding-bottom: 30%;
+    background-color: black;
+    float: left;
+    margin: 1.66%;
+}
+
+#container {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+}
+
+.bar {
+    background-color: white;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+}
+
+.new-game {
+    margin-left: 5%;
+    margin-right: 25%;
+}
+
+.message {
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.easy {
+    margin-left: 10%;
+    margin-right: 2.5%;
+}
+
+.hard {
+    margin-left: 2.5%;
+    margin-right: 10%;
+}
