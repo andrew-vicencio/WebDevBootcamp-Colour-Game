@@ -1,46 +1,85 @@
-function generate_colours() {
-    var squares_array = [6];
-    for (var i = 0; i < 6; i++){
-        squares_array[i] = generate_colour();
+diff = 6
+var colours = [];
+var chosen_colour;
+
+var squares = document.querySelectorAll('div.square');
+var colour_display = document.querySelector('div.colourDisplay');
+var header = document.querySelector('div.header');
+var message = document.querySelector('span.message');
+var resetBtn = document.querySelector("#reset");
+var difficulties = document.querySelectorAll('.diff');
+
+function init() {
+    for (var i = 0; i < difficulties.length; i++) {
+        difficulties[i].addEventListener("click", function () {
+            difficulties[0].classList.remove('selected');
+            difficulties[1].classList.remove('selected');
+            this.classList.add('selected');
+            this.textContent == "Easy" ? diff = 3 : diff = 6;
+            reset();
+        });
+    }
+
+    resetBtn.addEventListener("click", reset);
+
+    squares.forEach(function (elem, i) {
+        elem.addEventListener("click", function () {
+            curr = this.style.backgroundColor;
+            if (curr === chosen_colour) {
+                message.textContent = "Correct!";
+                winner();
+            } else {
+                message.textContent = "Wrong!";
+                this.style.backgroundColor = '#232323';
+            }
+        });
+    });
+
+    reset();
+}
+
+function generate_colours(x) {
+    var squares_array = [x];
+    for (var i = 0; i < x; i++) {
+        squares_array[i] = generate_random_colour();
     }
     return squares_array;
 }
 
-function generate_colour() {
-    return "rgb(" + Math.floor(Math.random() * 255 + 1) + ", "
-        + Math.floor(Math.random() * 255 + 1) + ", "
-        + Math.floor(Math.random() * 255 + 1) + ")";
+function generate_random_colour() {
+    return "rgb(" + Math.floor(Math.random() * 256) + ", "
+        + Math.floor(Math.random() * 256) + ", "
+        + Math.floor(Math.random() * 256) + ")";
 }
 
-var colours = generate_colours();
-
-squares = document.querySelectorAll('div.square');
-chosen_colour = colours[Math.floor(Math.random() * 6)];
-colour_display = document.querySelector('div.colourDisplay');
-colour_display.textContent = chosen_colour;
-header = document.querySelector('div.header');
-message = document.querySelector('span.message');
-
-squares.forEach( function(elem, i) {
-   elem.style.backgroundColor = colours[i];
-   elem.addEventListener("click", listener);
-});
-
-function listener(){
-    curr = this.style.backgroundColor;
-    if (curr === chosen_colour) {
-        message.textContent = "Correct!";
-        change_squares();
-    } else {
-        message.textContent = "Wrong!";
-        this.style.backgroundColor = '#232323';
-    }
+function pick_colour(colour_arr) {
+    return colour_arr[Math.floor(Math.random() * 6)];
 }
 
-function change_squares(){
-    squares.forEach(function(elem){
-       elem.style.backgroundColor = chosen_colour;
-       elem.removeEventListener("click", listener);
+function reset() {
+    colours = generate_colours(diff);
+    chosen_colour = pick_colour(colours)
+
+    colour_display.textContent = chosen_colour;
+    resetBtn.textContent = 'New Game';
+    message.textContent = '';
+
+    squares.forEach(function (elem, i) {
+        if (colours[i]) {
+            elem.style.backgroundColor = colours[i];
+            squares[i].style.display = "block";
+        } else {
+            squares[i].style.display = "none";
+        }
     });
+}
+
+function winner() {
+    squares.forEach(function (elem) {
+        elem.style.backgroundColor = chosen_colour;
+    });
+    resetBtn.textContent = "Play again?";
     header.style.backgroundColor = chosen_colour;
 }
+
+init();

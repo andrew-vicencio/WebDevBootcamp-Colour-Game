@@ -4,7 +4,7 @@ body {
 
 .header {
     padding: 3% 3%;
-    background-color: cadetblue;
+    background-color: steelblue;
 }
 
 h1 {
@@ -20,6 +20,7 @@ h1 {
     background-color: black;
     float: left;
     margin: 1.66%;
+    outline: none;
 }
 
 #container {
@@ -35,7 +36,7 @@ h1 {
     padding-bottom: 0.5%;
 }
 
-.new-game {
+.#reset {
     margin-left: 5%;
     margin-right: 25%;
 }
@@ -53,4 +54,8 @@ h1 {
 .hard {
     margin-left: 2.5%;
     margin-right: 10%;
+}
+
+.selected {
+    background-color: blue;
 }
